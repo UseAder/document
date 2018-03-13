@@ -1,0 +1,160 @@
+Vue.js是构建数据驱动的web应用开发框架
+
+开发环境搭建:声明式渲染=>组件系统=>路由机制=>状态管理=>...
+
+MVC,MVP,MVVM 架构模型对比
+	*"MVC":Controller 薄，View 厚，业务逻辑大都部署在 View
+	*"MVVM":双向数据绑定，View的变动，映射在 ViewModel，反之一样。
+	*"MVP":View 薄，不部署任何业务逻辑，称为"被动视图" (Passive View)Presenter 厚，逻辑都部署这里。
+m代表模型层  v代表视图层   c代表控制器层
+
+1. 模板语法  
+
+	(1)插值 
+		a.文本 {{}}
+		b.纯HTML v-html 防止XSS
+		c.表达式:class=“isshow？‘red’：‘yellow’”
+
+	(2)指令：是带有 v- 前缀的特殊属性
+		v-bind
+		v-if 创建和删除
+		v-show 隐藏和显示
+		v-on:click
+		
+	(3)缩写
+	
+		v-bind:src =>  :src
+		v-on:click => @click
+	指令
+·v-html
+
+·v-if
+
+SPA 单页面应用（single page application）
+
+vue的官网 https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel
+https://cn.vuejs.org/v2/guide/reactivity.html
+当你把一个普通的 JavaScript 对象传给 Vue 实例的 data 选项，Vue 将遍历此对象所有的属性，并使用 Object.defineProperty 把这些属性全部转为 getter/setter。
+
+template一个包装标签而已
+
+
+
+
+1. 计算属性-复杂逻辑
+
+	(1)基础例子
+	(2)计算缓存 VS methods
+	   
+		-计算属性是基于它们的依赖进行缓存的。
+		-计算属性只有在它的相关依赖发生改变时才会重新求值
+	(3)计算属性 VS watch
+		 - v-model 双向绑定
+	(4)计算setter
+1. 事件处理器
+
+	(1)监听事件-直接触发代码
+	(2)方法事件处理器-写函数名
+	(3)内联处理器方法-执行函数表达式
+	(4)事件修饰符 slef//自身 once//一次
+	(5)按键修饰符@keyup.enter
+1. 列表渲染
+	(1)v-for 
+		a. in 
+		b. of
+	(2)key：
+		*跟踪每个节点的身份，从而重用和重新排序现有元素
+		*理想的 key 值是每项都有的且唯一的 id。
+			-react 虚拟dom 对比
+	(3)数组更新检测 
+		a. 使用以下方法操作数组，可以检测变动
+	    push() pop() shift() unshift() splice() sort() reverse()
+
+	    b. filter(), concat() 和 slice() ,新数组替换旧数组
+
+	    c. 不能检测以下变动的数组
+
+	    	vm.items[indexOfItem] = newValue
+	    	*解决* Vue.set(example1.items, indexOfItem, newValue)
+
+	(4)应用:显示过滤结果
+		-使用计算属性
+1. 条件渲染
+	(1)v-if
+	(2)v-else
+	(3)template v-if
+	(4)v-show
+1. class与style绑定
+	(1)绑定HTML Class
+		-对象语法
+		-数组语法
+	(2)绑定内联样式
+		-对象语法
+		-数组语法
+		
+		//需要将 font-size =>fontSize
+1.	表单控件绑定 
+	  * v-model
+	  
+	(1)基本用法
+		-购物车
+	(2)修饰符
+		.lazy :失去焦点同步一次
+		.number :格式化数字
+		.trim : 去除首尾空格
+
+
+
+
+    *  1. 移动端浏览器上默认支持四个事件touchstart touchmove touchend touchcancel 四个事件
+
+
+禁用移动web移动web页面上的click事件响应都要慢上300ms这个情况：
+	<meta name="viewport" content="width=device-width,initial-scale=1.0"> 或
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	
+<!-- web想用tap 事件 swipe 需要引入zepto.touch.js 库 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

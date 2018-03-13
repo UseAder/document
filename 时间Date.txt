@@ -1,0 +1,9 @@
+getFullYear();
+getMouth();
+getDate();
+getDay();
+getHours();
+getMinutes();
+getSeconds();
+toLocaleString();//2917/8/3 ионГ9:22:33
+

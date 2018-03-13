@@ -1,0 +1,44 @@
+。。。购物车为空时显示的盒子
+
+
+
+
+。。。包裹购物车
+隐藏了一块产品结构
+
+给接口的图片加上编号
+//接口中取到接口中拼接出来的类名 ：
+	1.async:false  同步
+	2.on（‘click’，‘xxx y’，fun（）{}）	
+
+
+
+。。。推荐商品用接口
+$.ajax({
+	url:‘接口’，
+	datatype：json，
+}).done(function(data){
+	var $html=''，
+})
+点击按钮时var sid=当前这个盒子的图片的编号
+变成数组
+if（$.inArray(sid,arrsid）!=-1)判断当前的死的是否存在于
+cookie中  不纯在创建商品列表  存在商品数量加加
+
+//取cooKie的话取它名字getCookie（‘cartsid’）就行啊 数组来取。split（，） 
+//存cooKie的话addCookie（‘cartsid’，arrsid.tostring(),7）;存字符串
+
+arrsid.push(sid）；
+addCookie（‘cartsid’，arrsid.toString(）,7);
+arrnum.push(1)
+addCookie('cartnum',arrnum.tostring(),7);
+creategoods(sid,1);
+运行函数判断存在商品数量加加
+接口数据下面的sid和点击按钮对应的sid进行比较，确定内容
+var clone=$('.goods-iten:hidden'）.clone(ture
+
+attr（{
+src：data【i】。img，
+sid：data[i】。sid
+}
+}）换内容

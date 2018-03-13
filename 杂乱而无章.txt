@@ -1,0 +1,36 @@
+你用的编译软件有：Microsoft.sublime.
+apache是解析引擎
+
+bootstrap：前端开发框架。
+个人认为bootstrap偏向于实现简单的小页面，美观简约，赏心悦目。
+easyUI看起来有点呆板，但是API封装很好，可以避免引入额外插件的麻烦
+
+Node.js是一个Javascript运行环境(runtime)
+1.快，耗费内存
+2.RESTful API
+3.单线程
+4.单线程通过事件轮询实现操作
+5.非阻塞IO
+6.V8虚拟机
+7.事件驱动
+Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 
+Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。 
+Node.js 的包管理器 npm，是全球最大的开源库生态系统。
+
+什么是bootstrap和easyUI，他们的区别。
+什么是nodejs，用在什么地方
+去了解下模块开发require.js(Amd规范）。sea.js（Cmd规范）。nodejs（Commonjs规范）
+PostMan是什么
+
+集成开发环境（IDE，Integrated Development Environment ）是用于提供程序开发环境的应用程序，一般包括代码编辑器、编译器、调试器和图形用户界面等工具
+	
+框架的选择Express：完善、稳定、文档全、社区大
+、Koa、Hapi、egg.js
+nodejs官方帮助文档https://nodejs.org/dist/latest-v6.x/docs/api
+
+模拟请求的利器——Postman，把同一个项目的请求放在一个Collection里方便管理和分享，可以添加各种Headers可以模拟各种Http方法
+很强大的接口测试功能：在发起请求之前运行的Pre-request，在收到响应之后运行的Test，和一次运行所有请求的Collection Runner
+
+https://code.visualstudio.com
+网易
+网易云课堂

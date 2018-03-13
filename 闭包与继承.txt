@@ -1,0 +1,102 @@
+在JavaScript中，回调函数具体的定义为：函数A作为参数(函数引用)传递到另一个函数B中，	并且这个函数B执行函数A。我们就说函数A叫做回调函数
+?promise：异步编程的一种解决方案。取代callback和event。
+
+闭包就是能够读取其他函数内部变量的函数。由定义在一个函数内部的函数"。
+闭包特性1: 函数内部的函数所引用的变量会被保存下来
+闭包特性2: 由于内部函数所引用的外部变量会被保存下来 所以变量会一直在内存中保存直到浏览器被关闭，垃圾回收机制失效]
+?闭包的应用场景
+?局部变量的累加
+?自执行的匿名函数保存循环变量的值。
+
+https://github.com/UsheAnder/1707.git
+git remote set-url origin git+ssh://git@github.com/UsheAnder/daiikaijie.git
+
+?构造函数继承
+
+将父对象的构造函数绑定在子对象上,子对象能够继承父对象的属性和方法
+
+?call/apply继承
+
+在子对象构造函数中利用call或apply将父对象指向子对象的实例对象。
+
+?Prototype(原型)--原型的概念
+Javascript规定，每一个函数都有一个prototype对象属性，指向另一个对象（原型链）。
+prototype对象属性的所有属性和方法，都会被构造函数的实例继承。这意味着，我们可以把
+那些不变(公用)的属性和方法，直接定义在prototype对象属性上。
+
+?prototype就是调用构造函数所创建的那个实例对象的原型（__proto__）。
+（__proto__指向了构造函数的原型）
+
+prototype可以让所有对象实例共享它所包含的属性和方法。也就是说，
+不必在构造函数中定义对象信息，而是可以直接将这些信息添加到原型中。
+
+构造函数（类）---不具备方法和属性，只能用来构造实例对象，构造函数里面添加的	
+是属性（因为一般情况下属性各不相同）原型里面添加的是方法（因为方法都一样）
+实例（实例对象），具有一定的功能，被构造函数（类）构造出来的。
+
+
+?Prototype模式的其他验证方法
+?hasOwnProperty()  : 看是不是对象自身下面的属性， 只在属性存在于实例中时才返回 true。 
+?in操作符用来判断某个属性属于某个实例对象，可以是对象的直接属性，也可以是通过prototype继承的属性(包括Object下面的属性)。
+?toString() :系统对象下面都是自带的 , 系统对象都有toString(),自己写的对象都是通过原型链找Object下面的，可以把对象转成字符串，可以做进制转换或者类型的判断。
+?constructor：实例对象的构造函数  (实例对象.constructor)
+?instanceof：判断一个对象是否是一个构造函数（类）的实例。
+?isPrototypeOf (): 判断一个实例对象是否指向了该构造函数的原型对象。
+
+实例对象与原型之间的连接，叫做原型链。__proto__( 隐式连接 )
+JS在创建对象的时候，都有一个叫做__proto__的内置属性，用于指向创建它的函数对象的原型对象prototype。
+作为一个对象，当你访问其中的一个属性或方法的时候，如果这个对象中没有这个方法或属性
+，那么Javascript引擎将会访问这个对象的__proto__属性所指向上一个对象，并在那个对象中查找指定的方法或属性
+，如果不能找到，那就会继续通过那个对象	的__proto__属性指向的对象进行向上查找，直到这个链表结束。
+原型链的最外层：Object.prototype-->null
+javascript工厂---->老板   Object.prototype
+老板--生产经理----> Function.prototype
+
+?混合继承（构造函数+原型混合方式实现js的继承）
+栈内存：基本类型的值和引用类型的地址
+堆内存：引用类型的值。
+?属性的继承和构造函数的继承一致的，call/apply
+?方法的继承1：拷贝继承，一一赋值。
+?方法的继承2：原型继承（组合继承）。
+用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。
+即将父类的实例赋值给子类的原型。同时会将父类的构造函数赋值给子类的原型。
+子类的方法和属性会覆盖继承的方法和属性。
+子类的构造函数会被父类改变。
+
+
+function fn(callback){
+    setTimeout(function(){
+	console.log('first');
+		callback();
+	},1000);
+	}
+fn(function(){
+	console.log('我是回调函数里面的内容');
+	});
+
+function fn(callback){
+setTimeout(function(){
+	console.log('first');
+	callback && typeof(callback)=='function' && callback();//函数存在，类型是function 才执行
+		},1000);
+	}
+			
+function fn1(){
+	console.log('我是回调函数里面的内容');
+	}
+fn(fn1);
+
+
+
+function fn(){
+	var pro=new Promise(function(resolve,reject){
+		setTimeout(function(){
+	console.log('first');
+		resolve();
+		},1000);
+	});
+	return pro;
+}
+
+
+fn().then(fun(){},fun(){})//then：promise下面的原型下的方法。  第一个参数：成功时执行的函数

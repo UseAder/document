@@ -1,0 +1,209 @@
+Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。
+Node.js 的包管理器 npm，成为世界上最大的开放源代码的生态系统
+
+&var http = require("http");//加载引入nodejs 提供的http模块。创建服务器
+	*http.createserver(function(req,res){
+		res.writeHead("Content-type":"text/html;charset:utf-8");
+		res.write();//req.url=="/favicon.ico"
+		red.end();
+	}).listen(3000);
+&var url =require("url");//加载引入nodejs 提供的url模块。对于地址字符串进行处理
+	*console.log(url.parse(req.url,true));//参数true可以吧query变为对象
+	·protocol  	search:'?name=tian'
+	·slashes	query:'name=tian'	  		 
+	·auth		pathname:'/login'
+	·host		path:'/login?name=tian'
+	·port		href:'/login?name=tian'
+	·hostname
+	·hash
+&var querystring=require("querystring");//nodejs模块  转换对象
+	*console.log(querystring.parse(str))//{name:'hh',age:'100'}				*console.log		      		  ·(querystring.stringify(str2))//name=hh&age=100
+&var fs=require("fs");//nodejs提供的模块  操作本地文件系统
+	·得到文件与目录的信息：stat
+ 	·创建一个目录：mkdir
+ 	·创建文件并写入内容：writeFile,appendFile//异步处理writeFileSync.appendFileSync
+ 	·读取文件的内容：fs.readFile("..","utf-8",fun(error,data){}
+ 	·列出目录的东西：readdir
+ 	·重命名目录或文件：rename
+ 	·删除目录与文件：rmdir,unlink
+	*回调函数接受两个参数
+ 	·fs.stat(“hello.js”,function(error,info){}）
+ 	·相应的同步方法 加上Sync
+&var async =require("async"); //npm install --save async第三方的node模块 ，解决回调地狱问题
+	*async.waterfall([test1,test2,test3],function(error,result){
+    	      console.log(result);
+	·waterfall请求完第一个接口，把数据给第二个，请求第二个，把第二个的数据给第三个
+	·promsie 所有请求都结束， loading框消失 promise.all
+
+})
+爬虫·
+    ·var http =require('http');//https
+    ·const options = {
+	 hostname: 'www.tudou.com',//网站网址
+	 port: 80,//http默认端口号80；https默认端口号443
+	 path: '/index/recolist?secCateId=10275&pl=15&_=1508834439170',//空路径
+	 method: 'GET',//POST
+	  // headers: {
+	  //   'Content-Type': 'application/x-www-form-urlencoded',
+	  //   'Content-Length': Buffer.byteLength(postData)
+	  // }
+	};	
+    ·var req=http.request(options,function(res){//这个方法是异步执行 请求options信息  ，请求结果回调函数	
+          var data="";//一点一点拿回  运行下面函数
+          res.on('data', (chunk) => {//分段请求
+	  	data+=chunk;	
+	 	});
+          res.on('end', () => {//分段请
+	 	console.log(data);
+	   	});
+	})
+    ·req.end();//req 结束后需要end
+
+
+异步处理·
+方案1 callback 回调函数
+方案2 事件监听方案
+方案3 promise
+方案4 Async （第三方模块）
+
+************************
+
+项目注意:
+1.安装node-sass sass-loader 进行sass开发
+
+2.配置反向代理
+     proxyTable: {
+          '/v4/api': {
+              target: 'http://m.maizuo.com',
+              host: 'm.maizuo.com',
+              changeOrigin:true,
+              // pathRewrite: {
+              //     '^/v4/api': '/v4/api'
+              //   }
+          }
+    }
+
+3. 
+
+fetch -w3c
+
+    why:
+    XMLHttpRequest 是一个设计粗糙的 API，配置和调用方式非常混乱，
+    而且基于事件的异步模型写起来不友好。
+
+
+    兼容性不好
+    polyfill:
+    https://github.com/camsong/fetch-ie8
+
+    //get
+        fetch("**").then(res=>res.json()).then(res=>{console.log(res)})
+        fetch("**").then(res=>res.text()).then(res=>{console.log(res)})
+    //post
+
+        fetch("**",{
+              method:'post',
+              headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                       },
+              body: "name=kerwin&age=100"
+        }).then(res=>res.json()).then(res=>{console.log(res)});
+
+        fetch("/users",{
+              method:'post',
+              headers: {
+                        "Content-Type": "application/json"
+                       },
+              body: JSON.stringify({
+                name:"kerwin",
+                age:100
+              })
+        }).then(res=>res.json()).then(res=>{console.log(res)});
+
+
+        注意：
+        Fetch 请求默认是不带 cookie 的，需要设置 fetch(url, {credentials: 'include'})
+
+4. axios
+     
+************************
+
+1. webapp开发
+
+2. M站 开发
+
+3. Touch端开发
+
+移动端适配（移动端布局，移动端兼容性）：
+	1. flex. 
+	2. rem 
+	3. 百分比
+	4. 响应式布局 (媒体查询)
+
+
+
+
+1. 使用第三方插件
+	
+	"https://github.com/vuejs/awesome-vue#components--libraries"
+	集合了来自社区贡献的数以千计的插件和库。
+
+2. 使用第三方UI框架
+
+	饿了么UED团队推出的vue 前端框架：
+
+	(1)PC框架：
+	http://element.eleme.io/#/
+	https://github.com/ElemeFE/element
+
+
+	(2)移动端框架：
+	http://mint-ui.github.io/#!/zh-cn
+	https://github.com/ElemeFE/mint-ui
+
+1. 单文件组件
+
+	(1)单文件组件介绍 .vue
+		/*
+		a.
+		<template>
+			html代码
+		</template>	
+		<script>
+			js代码
+		</script>
+		<style>
+			css代码
+		</style>
+		b.
+		<template>
+	  		html代码
+		</template>
+		<script src="相对路径的外部的js"></script>
+		<style src="相对路径的外部的css"></style>
+
+		 */
+
+	(2)vue-cli引入
+		*vue init webpack-simple my-project
+		*vue init webpack my-project
+
+		*npm run dev 开发环境构建
+		*npm run build 生产环境构建
+	(3)单文件使用方法讲解
+
+		*<template> -html代码,最多可以包含一个
+		*<script> -js代码,最多可以包含一个
+		*<style>- css代码。可以包含多个，src的路径是相对的
+			style标签 加上scoped属性，css局部生效
+			style标签 加上lang="scss"，支持scss
+
+		*自动处理图片路(相对路径) - vue
+		* ES6的模块化导入导出
+		
+	(4)
+		vue-router: 路由
+		ESLint :代码检测工具，使用它可以避免低级错误和统一代码的风格. 两个空格与tab大战
+			*可以关闭(webpack.base.conf.js删除相应代码)
+		Karma + Mocha :单元测试，保证代码质量
+		Nightwatch:端到端测试(功能测试)，站在用户视角，功能测试，而非代码细节，比如表单、动画、页面跳转、dom渲染、Ajax等	

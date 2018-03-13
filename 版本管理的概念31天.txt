@@ -1,0 +1,40 @@
+版本管理工具  svn git
+右击出现git gul here
+	git bash here
+右击出现svn Checkout
+	TortoiseSVN
+版本管理工具， 首先是一个内容管理工具， 可以将项目的内容信息存放在版本管理服务	器上，方便项目组人员进行访问和查询修改。
+版本管理具有里程碑意义的主要有三个阶段CVS 阶段----->SVN 阶段---->Git 阶段
+
+?CVS 阶段每次提交项目都会将整个项目提交到服务器进行保存， 服务
+器存储着项目的 N 个备份， 开发过程中的协作效率较低， 同时也出现了各种传输的
+问题，所以慢慢淡出了行业
+ 
+ SVN 同样也是搭建服务器，让项目组成员将
+数据存储在服务器上， 但是每次改动并提交的时候， SVN 服务器并不重新保存整个
+项目的完整信息，而是和原来的项目进行对比，只保存改动的信息。这样就在很大
+的程度上对于项目版本服务器、项目协作效率有了显著的提升
+checkout---update--commit
+diff（对比）  恢复到版本  show log(提交信息)
+tortoiseSVN-- settings（设置）--saved data  取消记住用户名
+	
+  前面的 CVS 和 SVN 都是基于一个服务器的，如果脱离服务器，项目的版本保存就
+没有了任何意义，Git 恰恰处理了这样的问题，Git 是一个分布式的版本控制系
+统，在 Git 中即使用户离线，也能进行项目的提交和更新操作，等到下次连线服
+务器时进行整体的同步操作。
+
+TortoiseSVN-1.9.2.26806-x64-svn-1.9.2.//小乌龟软件
+文件消失后  小乌龟show-log一下
+点revert to this revision   恢复到这个版本
+
+
+VisualSVN-Server-3.5.7-x64//服务器软件
+、、安装会在盘服下建立仓库：Repositories中央服务区
+查看电脑ip cmd控制台输入ipconfig
+右点击svn检出创建链接地址https：//pc/svn/js1709/   要链接其他ip地址   将pc改为对方的ip地址10.31.155.18
+tortoiseSVN-- settings --saved data  
+tortoiseSVN--diff
+
+
+git仓库建立  
+git config --global credential.helper "store"   记住账号密码

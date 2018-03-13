@@ -1,0 +1,30 @@
+浮动
+<div class="pull-left">...</div>
+<div class="pull-right">...</div>
+attr()函数主要依赖的是Element对象的getAttribute()和setAttribute()两个方法。prop()函数主要依赖的则是JS中原生的对象属性获取和设置方式。
+
+
+
+
+
+
+Zepto是一个轻量级的针对现代高级浏览器的JavaScript库，?它与jquery有着类似的api
+
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+http://jqueryui.com/dialog/
+http://www.jeasyui.net/   EasyUI
+http://www.html5tricks.com/category/jquery-plugin
+
+
+
+http://img.alicdn.com/tps/i3/T1b1m3XkVpXXXXXXXX-32-32.gif
+
+
+http://www.hanhande.com/tv/7057263.shtml
+
+
+https://www.jeasyui.com/easyui/jquery.easyui.min.js"
+
+Jeasyui
+onclick="$('#p').panel('open')"

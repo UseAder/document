@@ -1,0 +1,67 @@
+HBuilder编写SCSS时：
+	·文件后缀：.scss
+	  触发命令地址：C:\Ruby23-x64\bin\sass.bat
+	  工作目录：默认为调用预编译器时执行保存命令的文档所在目录
+	·命令参数：%FileName% ../css/%FileBaseName%.css	
+	构建css完成
+
+
+
+html构建时  高度一样却显示不等，是因为【设置了定位或者上面盒子溢出造成】
+
+
+login的表示决定能不能登入  所输入的密码账号是否符合上数据库的内容
+
+             
+
+
+
+
+了解PHP的用处
+
+
+
+mysql数据库的建立
+	左点击wamp的mysql输入密码确定进入控制台（通过apps/../config,inc.php）
+	显示当前存在的数据库SHOW DATABASES;
+	选择你所需要的数据库USE xxx;??
+	查看当前所选择的数据库SELECT DATABASE();后面加上SHOW tables??表示显示这个数据库有多少张表
+	查看这张表下所有数据SELECT * FROM xxx
+	创建一个数据库CREATE DATABASE xxx;//xxx数据库的名称
+	创建一张表create table xxx(
+		sid tinyint（2）【整型长度2】unsigned【无符号】 not null【非空】auto_increment【自动数字】primary key【主键】，
+		用户名 varchar（20）not null,
+		密码  varchar(40) not null,
+		邮箱 varchar（40）not null，
+		regdate【注册日期】datetime not null【别加什么东西】
+		）default charset=utf8;【出现中文必要】
+	给表插入一条数据 INSERT INTO【可以不写】xxx() VALUES (null,'张三'，md5（123），'11@qq.com',now()【现在】)[[
+	删除指定的数据DELETE FROM users WHERE  username='Lee';或删除匹配sid%2=0【+—*%】
+	
+
+php中连接数据库注意MD5
+
+var $t=$('#fp-lift').offset();
+
+
+json是数据接口[{"":"","":""},{}]
+
+
+
+书写登入页面login时注意ajax中url中php文件的链接地址
+
+
+
+ajax。js:29未被捕获的类型错误:不能读取属性'innerHTML'的空值  H界面无法读取到ajax的内容 因为选择器queryselector（'.mj'）
+
+
+tianmao.html吗?hbt=1508165253453:2714未被发现的类型错误:不能读取未定义的属性“上”    		
+$('html,body').animate({
+			scrollTop:$top});   html和body运动到对应的滚动高度    之间逗号错了 呜
+
+
+
+
+
+先引入jq方法  下面的引用文件才可哟用
+

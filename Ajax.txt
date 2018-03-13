@@ -1,0 +1,112 @@
+?AJAX即“Asynchronous Javascript And XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。
+通过在后端与服务器进行少量数据交换，AJAX 可以使网页实现异步更新.可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+一部分以前由服务器负担的工作转移到客户端，减轻服务器和带宽的负担，无刷新更新页面，不需要等待.
+//同步：阻塞模式   代码按照一定顺序执行。//报错，阻塞代码向下执行
+//异步：非阻塞模式   代码各自执行。
+//异步模式
+	setTimeout(function(){
+		alert('异步');
+	},0);		
+	alert('123');			
+	setTimeout(function(){
+		alert(a);//不存在阻塞
+	},0);			
+	alert('123');
+//try{}catch(e){}finally{}   容错的,try有错误，执行catch里面的语句，catch参数代表错误信息,finally表示一定执行		
+
+/1.新建ajax对象，兼容(if...else   或运算符   try...catch(e)  三目运算符?:)
+var ajax=new XMLHttpRequest();//标准浏览器
+var ajax=new ActiveXObject('Microsoft.XMLHTTP');//ie6*/
+try{
+	ajax=new XMLHttpRequest();
+}catch(e){
+	ajax=new ActiveXObject('Microsoft.XMLHTTP');
+}
+
+2.ajax.open():参1:请求方式get/post   参2：接口地址url(本地路径)    参3：是否异步。true异步
+
+3.ajax.send();//5步 (0,1,2,3,4):就绪状态码(readystate)
+
+4.ajax.onreadystatechange=function()监听就绪状态码发生改变。
+	if(ajax.readyState==4){
+	console.log(ajax.responseText);//接口的内容
+	console.log(typeof ajax.responseText);//string   JSON.parse()/eval()
+	var arr=JSON.parse(ajax.responseText);//转换为json格式
+}
+
+<script>
+var ajax=null;
+	try{
+		ajax=new XMLHttpRequest();
+	}catch(e){
+		ajax=new ActiveXObject('Microsoft.XMLHTTP');
+	}
+
+</script>
+
+
+
+<?php//表单的传输name
+	header('content-type:text/html;charset=utf-8');
+	$user=$_GET['username'];//username:表单的name值。
+	$pass=$_GET['password'];
+	$user=$_POST['username'];//username:表单的name值。
+	$pass=$_POST['password'];
+	
+	echo "你的用户名是：$user 你的密码是：$pass";
+	
+?>
+
+
+	class Person{//创建一个类		
+public $name='zhangsan';//公有属性(成员)：大家都可以访问。
+private $age=2500;//类里面访问。
+protected $sex='女性';//受保护的属性，类和子类里面调用
+public function pfn(){
+echo $this->age;//$this:实例对象。
+		}
+类里面有构造函数，构造函数自己调用。
+function __construct(){
+echo $this->age;
+echo '-----';
+echo $this->sex;
+}
+}
+$p1=new Person();//实例化
+echo $p1->name;//zhangsan
+echo $p1->age;//报错
+$p1->pfn();
+echo $p1->age;//报/错的
+*class Student extends Person{
+function __construct(){
+echo $this->sex;
+}
+}new Student();
+
+
+//同源策略：阻止从一个域上加载的脚本获取或操作另一个域上的文档属性
+	//域名(网址/url)：http://www.baidu.com.cn   https://www.baidu.com.cn
+	/端口不同，域名不同，协议不同  出现跨域
+	/ip地址和ip对应的域名出现跨域
+	//为什么会出现跨域---同源策略
+同源策略阻止从一个域上加载的脚本获取或操作另一个域上的文档属性	
+
+
+?promise：异步编程的一种解决方案。取代callback和event
+promise构造函数：异步编程的一种解决方案。比传统的回调函数更合理，更强大。
+创建promise实例对象,构造函数的参数又是一个函数对象，函数对象里面又有两个参数，一个	代表成功的回调，一个是失败的回调
+	promise状态：pending(进行中) resolve(成功，已解决)  reject(失败，未解决)
+	pending-->resolve   进行中-->成功
+	pending-->reject     进行中-->失败
+	状态一旦设定，不可改变。
+	promise原型下面两个常用的方法：Promise.prototype.then  Promise.prototype.catch
+promise静态方法：
+Promise.all()：用于将多个 Promise 实例，包装成一个新的 Promise 实例，接受一个数组作为参数，
+只有数组里面的每个状态都变成resolve，则新的 Promise 实例状态才会变成resolve.	
+Promise.race() ：只要数组里面有一个状态发生改变，则新的 Promise 实例状态就跟着改变
+JSONP(JSON with Padding)是一个非官方的协议，通过javascript callback的形式	实现跨域访问。
+由于同源策略的限制，XmlHttpRequest只允许请求当前源（域名、协议、端口）的资源，为了实现跨域请求
+，可以通过script标签实现跨域请求，然后在服务端输出JSON	数据并执行回调函数，从而解决了跨域的数据请求。
+
+首先在客户端注册一个callback, 然后把callback的名字传给服务器。此时，服务器	
+先生成 json 数据。然后以 javascript 语法的方式，生成一个function , 	function 名字就是传递上来的参数.

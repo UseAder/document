@@ -1,0 +1,179 @@
+ nodejs作为后端
+	express的安装与使用
+		1.运行命令：npm i express -g安装express
+		2.运行命令：npm install -g express-generator安装express项目生成器
+		3.运行命令：express –e express创建一个名称为express的项目
+		4.cd到项目express目录下运行命令npm install安装所依赖的相应组件模块
+			运行命令npm start可以直接运行我们express项目，但是这种方式不可以实现代码修改的热更新；
+			运行命令supervisor ./bin/www可以直接运行我们express项目，并且这种方式可以实现代码修改的热更新操作；	
+		5.npm i express -S  (安装一个模块：express)
+注释：-D就是--save-dev 这样安装的包的名称及版本号就会存在package.json的devDependencies这个里面，而--save会将包的名称及版本号放在dependencies里面。
+		6.npm install serve-favicon  这个模块专门用于服务“默认，隐式的favicon”，这是GET /favicon.ico。
+
+
+安装 cnpm install mongoose -S
+
+	appjs.建立起数据库的连接 数据库名为nodeAndvue
+		var mongoose = require('mongoose');
+		mongoose.connect('mongodb://localhost/nodeAndvue', { useMongoClient: true });
+		mongoose.Promise = global.Promise;
+
+	1.在路由routes中的请求后直接建立一个名为cats的集合
+	var express = require('express');
+var router = express.Router();var mongoose = require('mongoose');
+
+	router.get('/', function(req, res, next) {
+
+	var Cat = mongoose.model('Cat', { name: String });
+	var kitty = new Cat({ name: 'Zildjian' });
+	kitty.save(function (err) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log('meow');
+	}
+	});
+
+ 	 res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+	node.js优雅的mongodb对象建模，对于数据进行规则的管理 连接到本地主机上运行的测试数据库nodeAndvue   表单名Cat
+
+
+	2.将插件添加到模式，然后使用模型paginate方法：
+	安装cnpm install mongoose-paginate -S
+	///var mongoose = require('mongoose');
+	///var mongoosePaginate = require('mongoose-paginate');
+	///var schema = new mongoose.Schema({ /* schema definition */ });//写入模型对象
+	///schema.plugin(mongoosePaginate);
+	///var Model = mongoose.model('Model',  schema); // Model.paginate()
+		1.在model.js文件中，进行数据模型的定义哦
+		 var mongoose = require('mongoose');
+		 var mongoosePaginate = require('mongoose-paginate'); 	
+		 var schema = new mongoose.Schema({
+   			 title:  String,
+   			 author: String,
+   			 body:   String,
+    			 password:String,
+   			 name:String,
+    			 gender:String,
+    			 interest:String,
+   			 desc:String,
+    			 comments: [{ body: String, date: Date }],
+   			 date: { type: Date, default: Date.now },
+   			 hidden: Boolean,
+   			 meta: {
+     				 votes: Number,
+     				 favs:  Number
+   			 }
+		});//模型对象
+		schema.plugin(mongoosePaginate);
+
+		module.exports = mongoose.model('xiao',  schema); //**接口暴露//参数1这个数据模型 数据导入集合的名称，参数2模型对象
+	       2.在controller.对数据模型进行操作
+		var mongoose = require('mongoose');
+		var Xiaojie=require('xiaojie.models');//引入需要操作的文件夹（..）
+
+		例如设置出口进行数据数据的post添加入集合 //req.body post请求 //req.query get请求 //req.params /xxx
+			exports.create=function(req,res,next){
+   			       const xiaojie=new Xiaojie(req.body);  		
+    			       xiaojie.save(function(err,data){
+        			   if(err){
+                                  	 console.log(err);
+       				   }else{
+           				 res.json(data)
+        			   }
+  			       })
+			}
+		//修改
+			exports.update = function(req,res,next){
+ 			      var id = req.params.id; // req.param('id')			
+   			      Xiaojie.findByIdAndUpdate(id,{$set: req.body}, {new:false} ) //{new:false}  找不到就新增一条
+   			      .then(data=>{
+                                     res.json({msg:'数据修改成功',status:200}); // 如果你要返回数据，这个data返回的是你之前修改的那个数据内容
+                              })
+                        }
+
+                //删除
+                        exports.remove = function(req,res,next){
+                              var id = req.params.id; // req.param('id')
+                              // 现在操作的都是mongoose而不是mongodb
+                              Xiaojie.findByIdAndRemove(id,function(err,data){
+                                     res.json({'message':'删除完成'})
+                               }）   
+                        }
+
+		//分页
+			exports.list = function(req,res,next){
+    			      var page=(req.body.page)?req.body.page:1;//页码
+                              var limit =(req.body.limit)?req.body.limit:5//记录
+                              var queryCondition={};//查询条件
+                              if(req.body.name&&req.body.name.trim().length>0){
+                                  name=req.body.name;
+                                     queryCondition={//条件查询
+                                          'name':new RegExp(name,"i")
+                                     }
+                              }
+                              Xiaojie.paginate(queryCondition,{page:page,limit:limit},function(err,data){
+                                   res.json(data)
+                              })
+                         }
+		
+		3.在路由routes中的响应请求后：
+		 var express = require('express')
+		 
+var router = express.Router();
+
+                 var dataCtrl=require('xiaojie.controller');//引入数据模型的操作	
+		 router.post('/data',dataCtrl.create);
+//添加
+		 router.post('/data/:id',dataCtrl.update);//更新
+
+		 router.delete('/data/:id',dataCtrl.remove)//删除
+		 
+router.post('/list',dataCtrl.list);//列表  更改page可改变页码  更改limit可改变每页显示的条数
+		 module.exports = router;
+
+前端例index.html数据获取  点击后添加数据 
+      $("#add").click(function(){
+        $.ajax({
+            type:'post',
+            url:'http://localhost:3000/users/data',
+            data:{
+                name:'xiaojie'
+            }
+            }).done(function(res){
+                console.log(res)
+        })
+    注:解决跨域：
+	安装：cnpm i cors -S
+		appjs引入：
+			var cors=require('cors');
+
+			app.use(cors())//变量app下
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

@@ -1,0 +1,83 @@
+header('content-type:text/html;charset=utf-8');//设置字符编码
+echo "输出";
+$s='php的变量';
+变量:  $符号定义变量。
+echo "<strong>$s</strong>";//.............双引号可以解析变量和标签，单引号不可以。
+而在 PHP 中，变量的类型是由赋值给变量的值确定的。。 弱类型 八大数据类型。
+boolean （布尔型）  integer （整型）
+float （浮点型, 也称作 double)     string （字符串）   
+array （数组） object （对象） 
+resource　（资源）：资源是由专门的函数来建立和使用的，例如打开文件、数据库连接、图形画布。
+$fp=fopen('abc.txt', 'r');//打开文件
+$content=fread($fp, 30);//读取内容
+echo $content;//输出内容
+echo gettype($fp);//获取类型  resource
+echo "<hr>";
+
+$n=null;
+$nn;//警告：输出null
+
+
+数据类型的获取和设置：gettype( ) settype( )
+echo gettype($num);//integer
+settype($string,'boolean');//强制转换
+
+
+php的输出：echo、print、print_r、var_dump
+echo、print可以省略括号，用空格加上所需显示的字符串或变量。
+ 区别是echo没有返回值，print有int类型的返回值。
+print_r的功能是打印一个变量的易于理解的信息，与echo和print的区别是，比如输出一个数组，
+echo和print输出的是Array，而print_r输出的除了Array外，还会把数组里的成员也打印出来。
+var_dump和print_r的区别，var_dump列出的是变量的详细信息，而print_r列出的则是易于理解的一些基本信息。*/
+
+输出布尔值的时候，输出的是数字的1和空,分别代表true和false
+	
+
+echo $arr[$i].'----';//拼接符号：点(.);
+
+$arr=array('zhangsan','lisi','wangwu','tianqi','hehe');
+$arr1=array('name'=>'zhangsan','age'=>100);
+for($i=0;$i<count($arr);$i++)
+
+?创建数据的两种方式
+···?array创建
+···?range()：建立一个包含指定范围单元的数组
+
+?数组的相关方法介绍
+count()和 sizeof()（别名） 统计数组下标的个数
+array_count_values() 统计数组中所有的值出现的次数
+array_unshift() 函数将新元素添加到数组头
+array_push() 函数将每个新元素添加到数组的末尾。
+array_shift()删除数组头第一个元素，与其相反的函数是 array_pop(),删除并返回数组末尾的一个元素。
+sort(，) 数组排序
+foreach() 提供了遍历数组的简单方式,仅能够应用于数组和对象
+each() 返回数组中当前的键／值对并将数组指针向前移动一步
+list() 把数组中的值赋给一些变量
+array_unique()  移除数组中重复的值(生成新数组)
+
+//函数的作用域：函数内部的变量外部无法访问。函数外部的变量内部无法访问;
+
+//访问函数内部的变量：全局变量
+	/*function fn(){
+		global $num;//定义，注意定义和赋值要分开
+		$num=1000;
+	}
+	fn();
+	echo $num;//1000*/
+	
+//超级全局变量 。。访问函数内部访问外部的变量
+	$GLOBALS['NUM']=100;
+	$_GET;
+	$_POST
+	$_REQUEST(请求)；不管post还是get都可以
+	isset（）函数，判断当前值是否纯在
+	表单：
+	$submit=@$_REQUEST['submit'];//@ 去除警告 容错
+	if(isset($submit)){
+		$user=$_GET['username'];
+		$user=$_REQUEST['username'];	
+		echo "你的名字是:{$user}"
+	}else{
+		exit（‘非法登入’）	
+	}
+	

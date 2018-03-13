@@ -1,0 +1,33 @@
+Mongoose提供了一个简单的，基于模式的解决方案来建模您的应用程序数据。它包括内置的类型转换，验证，查询构建，业务逻辑钩子等等
+
+
+、、、、、、、、、、、、、、、、、、、、、、、、、、、、这里创进行了数据库连接
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test', { useMongoClient: true });//进行数据库连接
+mongoose.Promise = global.Promise;
+
+var Cat = mongoose.model('Cat', { name: String ，sex：String});、、、添加sex选项列属性，得到新的第二次原型
+var kitty = new Cat({ name: 'Zildjian' ，sex：‘小姐’});、、添加数据列  数据库内容一切以第一次为原型
+kitty.save(function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('meow');
+  }
+});
+、、安装 cnpm i mongoose -D
+	运行  node index
+、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+
+mongoose-paginate 插件
+
+var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
+
+var schema = new mongoose.Schema({ /* schema definition */ });//、、对数据模型的定义
+schema.plugin(mongoosePaginate);//、、使用
+
+var Model = mongoose.model('Model',  schema); // Model.paginate()
+
+
+用户在开发或者调试网络程序或者是网页B/S模式的程序的时候是需要一些方法来跟踪网页请求的，用户可以使用一些网络的监视工具比如著名的Firebug等网页调试工具。今天给大家介绍的这款网页调试工具不仅可以调试简单的css、html、脚本等简单的网页基本信息，它还可以发送几乎所有类型的HTTP请求！Postman在发送网络HTTP请求方面可以说是Chrome插件类产品中的代表产品之一。

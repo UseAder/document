@@ -1,0 +1,60 @@
+*npm install webpack -g
+webpack 检测是否安装成功
+*webpack src\index.js dist\build.js
+入口：webpack src\index.js dist\
+出口：build.js(自定义)
+*npm install --save-dev webpack
+*npm install --save-dev webpack-dev-server
+注意  去webpack.config.js配置一下
+npm start改为npm run dev
+	     npm run build
+
+
+npm install -g vue-cli（vue项目的脚手架）
+vue init webpack-simple vuesimple
+         (生成的版)      （生成的文件名）
+"dev": "cross-env NODE_ENV=development webpack-dev-server --open 		--hot",
+	（在执行npm run dev   开发模式 ）			    (自动打开网页)（自动刷新网页）	
+
+"build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+			     （生产模式）	         （编译进度显示）
+
+caniuse.com 查看兼容
+
+1. Webpack可以看做是模块打包机：
+它做的事情是，分析你的项目结构，
+找到JavaScript模块(commonJs)以及其它的一些浏览器不能直接运行的拓展语言（Scss，jsx,vue等），
+并将其打包为合适的格式以供浏览器使用。
+
+    npm install webpack -g
+
+2.webpack.config.js
+
+	entry: {
+        index:__dirname + "/src/index.js"
+    }, //已多次提及的唯一入口文件
+    output: {
+        path: __dirname + "/dist", //打包后的文件存放的地方
+        filename: "[name].bundle.js",//打包后输出文件的文件名
+        publicPath:"/dist/"   //webpack output is served from
+
+    }
+
+3.webpack-dev-server
+	npm install --save-dev webpack
+	npm install --save-dev webpack-dev-server
+
+	 devServer: {
+        inline:true,
+        contentBase: "./",  //content not from webpack is serverd
+        port: '8088'
+    },
+
+
+4. loader -翻译机
+        
+        vue-loader
+        babel-loader
+        
+5. plugins
+        UglifyJsPlugin
